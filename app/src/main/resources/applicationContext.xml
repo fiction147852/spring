@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+
+
+	<!-- 그냥 -->
+	<bean id="tv" class="com.yedam.spring.TV" />
+
+	<!-- DI : xml 방식 -->
+	<bean id="cf" class="com.yedam.spring.xml.Chef" />
+
+	<bean class="com.yedam.spring.xml.Restaurant">
+		<property name="chef" ref="cf"></property>						<!-- 메서드 name은 해당필드의 setter와 연결된다 -->
+	</bean>
+
+	<!-- DI : anotation 방식 -->
+	<!-- <context:component-scan base-package="com.yedam.spring.anotation"></context:component-scan> -->
+
+	<!-- IoC, DI : Java Base 방식 / xml대신 사용하는 java?--> 
+	<context:component-scan	base-package="com.yedam.spring.java" />
+</beans>
