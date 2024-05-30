@@ -12,7 +12,7 @@
 		    , hire_date
 		    , job_id
 		    , salary
-		    , commission_oct
+		    , commission_pct
 		    , manager_id
 		    , department_id
 		    , birthday
