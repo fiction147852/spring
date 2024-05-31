@@ -4,16 +4,16 @@
 	<!-- 전체조회 -->
 	<select id="selectEmpAll" resultType="EmpVO">
 		SELECT employee_id
-		, first_name
-		, last_name
-		, email
-		, phone_number
-		, hire_date
-		, job_id
-		, salary
-		, commission_pct
-		, manager_id
-		, department_id
+			, first_name
+			, last_name
+			, email
+			, phone_number
+			, hire_date
+			, job_id
+			, salary
+			, commission_pct
+			, manager_id
+			, department_id
 		FROM employees
 		<!-- Dynamic Sql -->
 		<where>
@@ -69,7 +69,7 @@
 		, #{lastName}
 		, #{email}
 		<choose>
-			<when test="hireDate != null">
+			<when test="hireDate != null">	
 				, #{hireDate}
 			</when>
 			<otherwise>

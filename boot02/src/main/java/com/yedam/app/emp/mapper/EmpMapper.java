@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.yedam.app.emp.servicce.EmpVO;
+import com.yedam.app.emp.service.EmpVO;
 
 public interface EmpMapper {
 	// 전체조회
