@@ -18,7 +18,7 @@ public interface EmpMapper {
 	
 	// 수정
 	public int updateEmpInfo(@Param("eid")int empId,
-								@Param("info")EmpVO empVO);
+								@Param("info")EmpVO empVO);	// 여러개를 입력해서 값을 넘길때 Param을 사용한다.
 	
 	// 삭제
 	public int deleteEmpInfo(int empId);

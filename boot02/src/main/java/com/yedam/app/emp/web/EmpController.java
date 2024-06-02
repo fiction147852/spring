@@ -76,7 +76,7 @@ public class EmpController {
 		EmpVO findVO = empService.empInfo(empVO);
 		model.addAttribute("empInfo", findVO);
 		
-		return "emp/pdate";
+		return "emp/update";
 	}
 	// 수정 - 처리 : AJAX => QueryString
 	@PostMapping("empupdate")
@@ -84,6 +84,8 @@ public class EmpController {
 	public Map<String, Object> empUpdateAJAXQueryString(EmpVO empVO){
 		return empService.empUpdate(empVO);
 	}
+	
+
 	// 수정 - 처리 : AJAX => JSON (@RequestBody) 를 요구한다
 //	@PostMapping("empupdate")
 	@ResponseBody // => AJAX
