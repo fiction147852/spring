@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<form th:object="${empInfo}">
+		<div>
+			<label for="employeeId">사원번호</label>
+			<input type="text" th:field="*{employeeId}" readonly>
+		</div>
+		<div>
+			<label for="lastName">이름</label>
+			<input type="text" th:field="*{lastName}">
+		</div>
+		<div>
+			<label for="email">이메일</label>
+			<input type="email" th:field="*{email}" >
+		</div>
+		<div>
+			<label for="hireDate">입사일</label>
+            <input type="date" th:field="*{hireDate}" >
+		</div>
+		<div>
+			<label for="jobId">업무</label>
+			<input type="text" th:field="*{jobId}" >
+		</div>
+		<div>
+			<label for="salary">급여</label>
+			<input type="number" th:field="*{salary}">
+		</div>
+
+		<div>
+			<button type="button" id="updateBtn">저장</button>
+		</div>
+	</form>
+	<script>
+		$('#updateBtn').on('click', updateAjax);
+		
+		function updateAjax(event){
+			//1) Validation Check
+// 			let result = validationCheck();
+// 			if(result == false) return;
+			if(!validationCheck()) return; //논리부정
+			
+			//2) 보낼데이터 정리
+			let dataObj = getEmpObj();
+			
+			//3) AJAX
+			$.ajax('empupdate', {
+// 				type : 'post',
+// 				data : dataObj //객체 => QueryString  / data타입같은경우는 돌아오는값을 지정하는것
+ 				// 데이터타입은 알아서 파싱해줄거라 굳이 지정안해도 무방하다 // 근데 data를 내가 파싱해서 지정한다면 그값만 들어오기때문에 굳이 하지말란소리다
+				// 알아서 데이터타입이 바뀔것이다 하지만 밑에는 바뀌지않는다
+				
+				//JSON
+				contentType : 'application/json',
+				data : JSON.stringify(dataObj)
+				//객체 or 배열 => JSON.stringfy() : 객체 or 배열 => JSON 
+				
+			})
+			.done(result => {
+				console.log(result);
+			})
+			.fail(err=> console.log(err));
+			
+			
+			
+			function validationCheck(){
+				let name = $('#lastName');
+				if(name.val() == ''){
+					alert('사원이름은 필수로 입력해야합니다.');
+					name.focus();
+					return false;
+				}
+				
+				return true;
+			}
+			
+			function getEmpObj(){
+				let formAry = $('form').serializeArray();
+				//[{ name : 'employeeId', value : '209'},
+// 				   { name : 'lastName'  , value : King'}, ...]	이형식보단
+				formAry[formAry.length-1] = 100;
+				
+				let formObj = {};
+				formAry.forEach(inputTag => {
+					// inputTag= {name : 'employeeId', value : '209'}
+					formObj[inputTag.name] = inputTag.value;
+					//formObj['employeeId'] = '209';
+				})
+				// { employeeId : '209', lastName : 'King' , ...}	이형식을 원한다
+				return formObj;
+			}
+		}
+		
+
+	</script>
+</body>
+</html>

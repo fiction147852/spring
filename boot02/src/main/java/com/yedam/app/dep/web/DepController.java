@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.app.dep.service.DepService;
 import com.yedam.app.dep.service.DepVO;
-import com.yedam.app.emp.service.EmpVO;
 
 @Controller
 public class DepController {
@@ -27,7 +26,7 @@ public class DepController {
 		// 1) 해당기능수행
 		List<DepVO> list = depService.depList();
 		// 2) 클라이언트에 전달한 데이터 받기
-		model.addAttribute("empList", list);
+		model.addAttribute("depList", list);
 		return "dep/list";
 	}
 
@@ -51,7 +50,7 @@ public class DepController {
 	
 	// 등록 - 처리		=> form 태그를 통한 submit
 	@PostMapping("depInsert")				
-	public String depInsertProcess(DepVO depVO) {	//등록할건 한사람에대한 정보를 받아서 insert할것이다 / EmpVO empVO는 맞는데 어떤포멧을할지 정해야한다 -> 커맨드객체(쿼리 string) or ??? 
+	public String depInsertProcess(DepVO depVO) {	
 		int did = depService.depInsert(depVO);
 		String url = null;
 		if(did >-1) {

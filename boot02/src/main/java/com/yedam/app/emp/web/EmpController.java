@@ -25,7 +25,7 @@ public class EmpController {
 	// POST : 데이터 조작(등록, 수정, 삭제)		// POST는 HEADER를 한번 거쳐서 오기때문에 보안이 있따
 	
 	// 전체조회 : GET
-	@GetMapping("empList")
+	@GetMapping("empList")		//이 괄호가 경로다
 	public String empList(Model model) {	//Model = Request + response 를 합쳐놓은것 그냥 Model 사용하면 된다 구분하지말고
 		// 1) 해당 기능 수행 -> Service
 		List<EmpVO> list = empService.empList();
@@ -37,7 +37,7 @@ public class EmpController {
 	}
 	
 	// 단건조회 : GET
-	@GetMapping("empInfo")
+	@GetMapping("empInfo")		//커맨드 객체 => QueryString = 
 	public String empInfo(EmpVO empVO, Model model) {
 		// 1) 해당 기능 수행 -> Service
 		EmpVO findVO = empService.empInfo(empVO);
@@ -45,11 +45,15 @@ public class EmpController {
 		model.addAttribute("empInfo", findVO);
 		
 		return "emp/info"; // 3) 데이터를 출력할 페이지 결정
+		// "classpath:/templates/" + "emp/info" + "thml"	//이작업을 뷰 리절브가 한다
+		// => classpath:/templates/emp/info.html			//이작업을 뷰 리절브가 한다
+		// classpath: => src/main/resources 를 가리킨다 -> 내부적으로 src 리소시즈를 가리키고있따
 	}
 	
 	// 등록 - 페이지 : GET 		//빈페이지를 불러온다
 	@GetMapping("empInsert")
 	public String empInsertForm(Model model) {
+		model.addAttribute("empVO", new EmpVO());
 		return "emp/insert";
 	}
 	
@@ -68,18 +72,23 @@ public class EmpController {
 		
 		return url;		//원래는 페이지를 정해야하는 return에
 	}
+	
+	
 	// 수정 - 페이지
 	@GetMapping("empupdate")
 	public String empUpdateForm(Integer employeeId, Model model) {
 		EmpVO empVO = new EmpVO();
 		empVO.setEmployeeId(employeeId);
+		
 		EmpVO findVO = empService.empInfo(empVO);
 		model.addAttribute("empInfo", findVO);
 		
 		return "emp/update";
 	}
-	// 수정 - 처리 : AJAX => QueryString
-	@PostMapping("empupdate")
+	
+	//update.html에서 처리하는데 쿼리스트링과 제이슨방식 두가지를 잘 봇것
+	// 수정 - 처리 : AJAX => QueryString	
+//	@PostMapping("empupdate")
 	@ResponseBody // => AJAX
 	public Map<String, Object> empUpdateAJAXQueryString(EmpVO empVO){
 		return empService.empUpdate(empVO);
@@ -87,14 +96,14 @@ public class EmpController {
 	
 
 	// 수정 - 처리 : AJAX => JSON (@RequestBody) 를 요구한다
-//	@PostMapping("empupdate")
+	@PostMapping("empupdate")
 	@ResponseBody // => AJAX
 	public Map<String, Object> empUpdateAJAXJSON(@RequestBody EmpVO empVO){
 		return empService.empUpdate(empVO);
 	}
 	
 	// 삭제 - 처리		//정보를 아예 삭제하기때문에 페이지를 지워버린다  
-	@GetMapping("empDelete")
+	@GetMapping("empdelete")			//이게 경로다
 	public String empDelete(EmpVO empVO) {
 		empService.empDelete(empVO);
 		return "redirect:empList";		

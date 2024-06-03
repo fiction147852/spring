@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<form name="insertForm" 
+		th:action="@{/empInsert}" method="post" th:object="${empVO}">	<!-- method는 th를 사용하지 않는다 -->
+		<!-- empcontroller에서 EmpVO의 데이터들이 위ㅣ의 object로 들어온다 
+			 form태그에 있는 obejct 즉 필드의 ~~
+			 쉽게말해 원래는 empVO.employeeId여야하지만 객체는 이미 필드에 있으니까
+			 *{employeeId} 로 들어간다
+			 			<input type="text" th:field="*{eId}">
+			 			이방식으로 열렸다면 정확한 이름으로 서로 연결되어있다
+			 
+		-->
+		
+		<div>
+			<label for="lastName">이름</label>
+			<input type="text" th:field="*{lastName}">
+		</div>
+		<div>
+			<label for="email">이메일</label>
+			<input type="email" th:field="*{email}" >
+		</div>
+		<div>
+			<label for="hireDate">입사일</label>
+            <input type="date" th:field="*{hireDate}" >
+		</div>
+		<div>
+			<label for="jobId">업무</label>
+			<input type="text" th:field="*{jobId}" >
+		</div>
+		<div>
+			<label for="salary">급여</label>
+			<input type="number" th:field="*{salary}">
+		</div>
+
+		<div>
+			<button type="submit">저장</button>
+		</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf Test</title>
+</head>
+<body>
+	<!-- thymeleaf, 유일한 태그 -->
+	<th:block th:each="num : ${#numbers.sequence(1,5)}">
+		<p th:text="${num}"/>
+		<p>[[$ {num} ]]</p>
+	</th:block>
+	<hr>
+	<!--/* 기본 방식 => th:속성="${}" or th:src="@{}" */-->
+	<!--/* text속성 => 템플릿문법, [[ ]] */-->
+	<p>[[ ${'사원번호 : ' + empInfo.employeeId} ]]</p>
+	<p>사원 이름 : [[ ${empInfo.lastName} ]]</p>
+	<p>[[ ${empInfo.jobId} ]]</p>
+</body>
+</html>

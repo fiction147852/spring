@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="contextPath" th:value="yedam"><!-- ${#httpServletRequest.getContextPath()} -->
+<title>전체사원조회</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>사원번호</th>	<!-- employeeId -->
+				<th>이름</th>		<!-- lastName -->
+				<th>입사일자</th>	<!-- hireDate -->
+				<th>업무</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- /*
+				타임리프의 경우
+				조건문과 반복문이 함께 사용될 대 
+				<th:block/> 태그를 이용해서 분리
+			*/ -->
+			<th:block th:each="emp : ${empList}">		<!-- 반복문은 보통 block으로한다 -->
+				<tr th:onclick="|location.href='@{/empInfo(employeeId=${emp.employeeId})}'|">	<!-- ||를 앞뒤로 넣으면 문자열로 받아들여진다-->		
+				<tr>
+					<td th:text="${emp.employeeId}"/>	<!-- 변수표현식이 사용된 태그 앞에는 th:가 꼭 붙어야 한다 -->
+					<td th:text="${emp.lastName}"></td>
+					<!--/* <td>[[${emp.hireDate}]]</td> */-->
+					<td>[[${#dates.format(emp.hireDate, 'yyyy년MM월dd일')}]]</td> <!-- 괄호에 일반변수 다음엔 내가어떤형식으로 할지를 적는다 -->
+					<td>[[${emp.jobId}]]</td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+	
+	<script>
+		let context = $('meta[name="contextPath"]').attr('value');
+		$('tbody > tr').on('click', function(event){
+			let eId = $(event.currentTarget).children().eq(0).text();
+			let url = '/empInfo?employeeId=' + eId;
+			console.log(url);
+			location.href=url;
+		});
+	</script>
+
+</body>
+</html>

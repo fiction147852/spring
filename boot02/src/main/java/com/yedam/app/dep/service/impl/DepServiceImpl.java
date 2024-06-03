@@ -16,7 +16,6 @@ public class DepServiceImpl implements DepService{
 	@Autowired
 	DepMapper depMapper;
 	
-	
 	@Override
 	public List<DepVO> depList() {
 		return depMapper.selectDepAll();
@@ -34,7 +33,7 @@ public class DepServiceImpl implements DepService{
 		return result == 1 ? depVO.getDepartmentId() : -1 ;
 	}
 
-	@Override
+	@Override		//Map이 키 값 키 값 으로 값을 받는것이니까 depVO를 받는데 그걸 키값 으로 정의를 해두고 사용한다?
 	public Map<String, Object> depUpdate(DepVO depVO) {
 		Map<String, Object> map = new HashMap<>();
 		boolean inSuccessed = false;
