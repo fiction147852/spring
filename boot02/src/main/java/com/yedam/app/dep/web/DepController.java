@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.app.dep.service.DepService;
 import com.yedam.app.dep.service.DepVO;
+import com.yedam.app.emp.service.EmpVO;
 
 @Controller
 public class DepController {
@@ -43,8 +44,9 @@ public class DepController {
 	
 	
 	// 등록 - 페이지 : GET 		//빈페이지를 불러온다
-	@GetMapping("dmpInsert")
+	@GetMapping("depInsert")
 	public String depInsertForm(Model model) {
+		model.addAttribute("depVO", new DepVO());
 		return "dep/insert";
 	}
 	
@@ -55,6 +57,8 @@ public class DepController {
 		String url = null;
 		if(did >-1) {
 			url = "redirect:depInfo?departmentId=" + did;
+		}else {
+			url = "redirect:empList";  
 		}
 		
 		return url;
@@ -71,7 +75,7 @@ public class DepController {
 		return "dep/update";
 	}
 	// 수정 - 처리 : AJAX => QueryString
-	@PostMapping("depupdate")
+//	@PostMapping("depupdate")
 	@ResponseBody // => AJAX
 	public Map<String, Object> depUpdateAJAXQueryString(DepVO depVO){
 		return depService.depUpdate(depVO);
@@ -79,7 +83,7 @@ public class DepController {
 	
 
 	// 수정 - 처리 : AJAX => JSON (@RequestBody) 를 요구한다
-//	@PostMapping("depupdate")
+	@PostMapping("depupdate")
 	@ResponseBody // => AJAX
 	public Map<String, Object> depUpdateAJAXJSON(@RequestBody DepVO depVO){
 		return depService.depUpdate(depVO);

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <form th:object="${depInfo}">
+        <div>
+            <label for="departmentId">부서번호</label>
+            <input type="text" th:field="*{departmentId}" readonly>
+        </div>
+        <div>
+            <label for="departmentName">부서명</label>
+            <input type="text" th:field="*{departmentName}">
+        </div>
+        <div>
+            <label for="managerId">관리자번호</label>
+            <input type="text" th:field="*{managerId}">
+        </div>
+        <div>
+            <label for="locationId">위치번호</label>
+            <input type="text" th:field="*{locationId}">
+        </div>
+        <div>
+            <button type="button" id="updateBtn">저장</button>
+        </div>
+    </form>
+    <script>
+        $('#updateBtn').on('click', updateAjax);
+        
+        function updateAjax(event){
+            if(!validationCheck()) return; 
+            
+            let dataObj = getDepObj();
+            
+            $.ajax('depupdate', {
+                contentType : 'application/json',
+                data : JSON.stringify(dataObj)
+            })
+            .done(result => {
+                console.log(result);
+            })
+            .fail(err => console.log(err));
+            
+            function validationCheck(){
+                let name = $('#departmentName');
+                if(name.val() == ''){
+                    alert('부서명은 필수로 입력해야합니다.');
+                    name.focus();
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function getDepObj(){
+                let formAry = $('form').serializeArray();
+                formAry[formAry.length-1] = 100;
+                
+                let formObj = {};
+                formAry.forEach(inputTag => {
+                    formObj[inputTag.name] = inputTag.value;
+                })
+                return formObj;
+            }
+        }
+    </script>
+</body>
+</html>

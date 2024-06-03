@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회사 정보 조회</title>
+</head>
+<body>
+	<div>
+		<div>
+			<label for="departmentId">부서번호</label>
+			<input type="text" id="departmentId" th:value="${depInfo.employeeId}" readonly>
+		</div>
+		<div>
+			<label for="departmentName">부서명</label>
+			<input type="text" id="departmentName" th:value="${depInfo.lastName}" readonly>
+		</div>
+		<div>
+			<label for="managerId">관리자번호</label>
+			<input type="text" id="managerId" th:value="${depInfo.email}" readonly>
+		</div>
+		<div>
+			<label for="locationId">위치번호</label>
+            <input type="date" id="locationId" th:value="${depInfo.locationId}" readonly>
+		</div>
+
+		<div>
+			<button type="button"
+			 th:onclick="|location.href='@{/depupdate(departmentId=${depInfo.departmentId})}'|">수정</button>	 <!-- 타임리프에선 @{} 형식을 사용 /를 사용하여 절대경로를 사용 여기서만인지는 확인 질문-->
+			<button type="button"
+			 th:onclick="|location.href='@{/depList}'|">목록</button>
+			<button type="button"
+			 th:onclick="|location.href='@{/depdelete(departmentId=${depInfo.departmentId})}'|">삭제</button>
+		</div>
+	</div>
+</body>
+</html>

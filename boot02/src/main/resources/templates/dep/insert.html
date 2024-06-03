@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <form name="insertForm" 
+        th:action="@{/depInsert}" method="post" th:object="${depVO}">    
+        <div>
+            <label for="departmentName">부서명</label>
+            <input type="text" th:field="*{departmentName}">
+        </div>
+        <div>
+            <label for="managerId">관리자번호</label>
+            <input type="text" th:field="*{managerId}">
+        </div>
+        <div>
+            <label for="locationId">위치번호</label>
+            <input type="text" th:field="*{locationId}">
+        </div>
+        <div>
+            <button type="submit">저장</button>
+        </div>
+    </form>
+</body>
+</html>
