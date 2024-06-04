@@ -8,19 +8,19 @@
 	<div>
 		<div>
 			<label for="departmentId">부서번호</label>
-			<input type="text" id="departmentId" th:value="${depInfo.employeeId}" readonly>
+			<input type="text" id="departmentId" th:value="${depInfo.departmentId}" readonly>
 		</div>
 		<div>
 			<label for="departmentName">부서명</label>
-			<input type="text" id="departmentName" th:value="${depInfo.lastName}" readonly>
+			<input type="text" id="departmentName" th:value="${depInfo.departmentName}" readonly>
 		</div>
 		<div>
 			<label for="managerId">관리자번호</label>
-			<input type="text" id="managerId" th:value="${depInfo.email}" readonly>
+			<input type="text" id="managerId" th:value="${depInfo.managerId}" readonly>
 		</div>
 		<div>
 			<label for="locationId">위치번호</label>
-            <input type="date" id="locationId" th:value="${depInfo.locationId}" readonly>
+            <input type="text" id="locationId" th:value="${depInfo.locationId}" readonly>
 		</div>
 
 		<div>

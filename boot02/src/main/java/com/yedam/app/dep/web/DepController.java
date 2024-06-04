@@ -22,7 +22,7 @@ public class DepController {
 	DepService depService;
 
 	// 부서전체조회
-	@GetMapping()
+	@GetMapping("depList")
 	public String depList(Model model) {
 		// 1) 해당기능수행
 		List<DepVO> list = depService.depList();
@@ -58,13 +58,13 @@ public class DepController {
 		if(did >-1) {
 			url = "redirect:depInfo?departmentId=" + did;
 		}else {
-			url = "redirect:empList";  
+			url = "redirect:depList";  
 		}
 		
 		return url;
 	}
 	// 수정 - 페이지
-	@GetMapping("depupdate")
+	@GetMapping("depUpdate")
 	public String swpUpdateForm(Integer departmentId, Model model) {
 		DepVO depVO = new DepVO();
 		depVO.setDepartmentId(departmentId);
@@ -75,7 +75,7 @@ public class DepController {
 		return "dep/update";
 	}
 	// 수정 - 처리 : AJAX => QueryString
-//	@PostMapping("depupdate")
+//	@PostMapping("depUpdate")
 	@ResponseBody // => AJAX
 	public Map<String, Object> depUpdateAJAXQueryString(DepVO depVO){
 		return depService.depUpdate(depVO);
@@ -83,7 +83,7 @@ public class DepController {
 	
 
 	// 수정 - 처리 : AJAX => JSON (@RequestBody) 를 요구한다
-	@PostMapping("depupdate")
+	@PostMapping("depUpdate")
 	@ResponseBody // => AJAX
 	public Map<String, Object> depUpdateAJAXJSON(@RequestBody DepVO depVO){
 		return depService.depUpdate(depVO);

@@ -6,6 +6,6 @@ import lombok.Data;
 public class DepVO {
 	private Integer departmentId;
 	private String departmentName;
-	private Integer managerId;
+	private int managerId;
 	private Integer locationId;
 }

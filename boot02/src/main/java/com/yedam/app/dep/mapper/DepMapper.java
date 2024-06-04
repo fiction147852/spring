@@ -11,7 +11,7 @@ public interface DepMapper {
 	public List<DepVO> selectDepAll();	
 	
 	// 단건조회
-	public DepVO selectDepInfo();	
+	public DepVO selectDepInfo(DepVO depVO);	
 	
 	// 등록
 	public int insertDepInfo(DepVO depVO);

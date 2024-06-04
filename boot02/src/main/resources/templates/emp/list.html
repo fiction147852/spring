@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
+
 <head>
 <meta charset="UTF-8">
-<meta name="contextPath" th:value="yedam"><!-- ${#httpServletRequest.getContextPath()} -->
+<meta name="contextPath" th:value="${#httpServletRequest.getContextPath()}">
 <title>전체사원조회</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- <th:block th:replace="common/configs/default_config :: ConfigFragment"></th:block> -->
+<!-- 플래그먼트를 불러오겠단 소리
+	replace는 통째로 바꾸겠다는것		toreplace= 뒤의것은 경로다	classpath, 즉 실제경로를 안써도 괜찮다
+	insert는 하위태그로 집어넣겠다 라는것
+ -->
 </head>
 <body>
+<!-- 	<div th:insert="common/fragments/header :: headerFragment"></div> -->
 	<table>
 		<thead>
 			<tr>

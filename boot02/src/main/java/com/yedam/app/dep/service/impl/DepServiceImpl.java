@@ -23,7 +23,7 @@ public class DepServiceImpl implements DepService{
 
 	@Override
 	public DepVO depInfo(DepVO depVO) {
-		return depMapper.selectDepInfo();
+		return depMapper.selectDepInfo(depVO);
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
 <head>
 <meta charset="UTF-8">
 <title></title>
@@ -13,9 +16,7 @@
 			 *{employeeId} 로 들어간다
 			 			<input type="text" th:field="*{eId}">
 			 			이방식으로 열렸다면 정확한 이름으로 서로 연결되어있다
-			 
 		-->
-		
 		<div>
 			<label for="lastName">이름</label>
 			<input type="text" th:field="*{lastName}">
