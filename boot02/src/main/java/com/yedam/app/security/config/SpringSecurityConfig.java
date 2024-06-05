@@ -52,8 +52,10 @@ public class SpringSecurityConfig {
 			.anyRequest().authenticated()	//이걸 정의해주면 다해줘야한다? 		//권한상관없이 나머지 경로에대해서 처리하겠다
 		.and()
 		.formLogin()
+			.defaultSuccessUrl("/all")
 		.and()
-		.logout();
+		.logout()
+			.logoutSuccessUrl("/all");
 		return http.build();
 	}
 }
