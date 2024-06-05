@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>AJAX</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<div>
+		<input type="file" name="uploadFiles" multiple>
+		<button class="uploadBtn">upload</button>
+	</div>
+	<script>
+		$('.uploadBtn').on('click', function(event) {
+			let formData = new FormData();
+			// 		유사)jQuery.serializeArray();
+			// 		1) <form/>태그 내부의 입력태그 정보를 한번에 받음
+			// 		2) AJAX를 이용하여 'Content-type:multiple/form-data
+			
+			let input = $(event.currentTarget).prev()[0];		//jquery 객체로 들어올때가잇어서 이걸 깨야 내부에있는 tiles? files?에 접근하기 쉽다
+			let fileList = input.files;
+			
+			for(let file of fileList){
+				formData.append(input.name, file);
+			}
+			
+			
+			console.log(formData.get("uploadFiles"));
+			
+			fetch('uploadsAjax',{	//폴더 전송
+				method : 'post',
+				body : formData
+			})
+			.then(res => res.json())
+			.then(result =>{
+				console.log(result);
+			})
+			.catch(err => console.log(err));
+			
+			
+			$.ajax('uploadsAjax',{
+				type : 'post',
+				data : formData,		//data 속성의 값(객체타입)을
+				processData : false,	//QueryString으로 변환하는 설정
+				contentType : false		//기본 contentType을 사용하지않겠다고 설정
+			})
+			.done(result =>{
+				for(let image of result){
+					let imgTag = `<img src="images/${image}" style= "width : '50%;">`;
+					$('div').append(imgTag);
+				}
+			})
+			.fail(err => console.log(err));
+		});
+	</script>
+</body>
+</html>

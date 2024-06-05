@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogAspect {
 	//포인트컷 : 조인포인트중에서 Advice(횡단관심)이 적용될 메소드 필터
-	@Pointcut("within(com.yedam.app.emp.service.impl.*)")
+	@Pointcut("within(com.yedam.app.emp.service.impl.*)")	//
 	public void allPointCut() { //이메서드로인해 밑의 포인트컷이 실행된다
 		
 	}
@@ -25,7 +25,7 @@ public class LogAspect {
 		System.out.println("parameter list : " + args.toString());
 	}
 	
-	@Around("allPointCut()")
+	@Around("allPointCut()")	//실행전후 모두에게 적용
 	public Object logger(ProceedingJoinPoint joinPoint) throws Throwable {
 		String signaterStr = joinPoint.getSignature().toString();
 		System.out.println("시작 : " + signaterStr);
