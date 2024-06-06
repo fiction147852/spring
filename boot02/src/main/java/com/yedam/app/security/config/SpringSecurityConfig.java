@@ -27,7 +27,8 @@ public class SpringSecurityConfig {
 								.username("user1")
 								.password(passwordEncoder().encode("1234"))
 								.roles("USER")	//ROLE_USER
-//								.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   roles와 authorities 동시에 사용은안함 왜? 헷갈려서
+//									.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   
+//									roles와 authorities 동시에 사용은안함 왜? 헷갈려서
 								.build();
 		
 		
@@ -35,7 +36,8 @@ public class SpringSecurityConfig {
 								.username("admin1")
 								.password(passwordEncoder().encode("1234"))
 								.roles("ADMIN")	//ROLE_USER
-//									.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   roles와 authorities 동시에 사용은안함 왜? 헷갈려서
+//									.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   
+//									roles와 authorities 동시에 사용은안함 왜? 헷갈려서
 								.build();
 		
 		return new InMemoryUserDetailsManager(user, admin);
