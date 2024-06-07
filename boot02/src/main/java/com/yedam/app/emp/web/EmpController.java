@@ -67,7 +67,7 @@ public class EmpController {
 			url = "redirect:empInfo?employeeId=" + eid;		// 2)프로젝트 내부에있는 컨트롤러 아무거나 써주면 된다		// 3) 페이지가 아니라특정한 데이터값을 반환하는것 responsBody (페이지가아닌 데이터가보이게딘다)
 		}else {
 			// 정상적으로 등록 되지 않은 경우
-			url = "redirect:empList";  //redirect: 을 꼭 써야한다 / 이건 컨트롤러가아닌 ???를 호출한다
+		url = "redirect:empList";  //redirect: 을 꼭 써야한다 / 이건 컨트롤러가아닌 ???를 호출한다
 		}
 		
 		return url;		//원래는 페이지를 정해야하는 return에

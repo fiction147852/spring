@@ -124,11 +124,14 @@
 	</insert>
 	<!-- 수정 -->
 	<update id="updateEmpInfo">
-		UPDATE employees SET last_name = #{info.lastName} , job_id =
-		#{info.jobId}
+		UPDATE employees 
+			SET 
+				last_name = #{info.lastName},
+				job_id = #{info.jobId}
 		<if test="info.salary > 0"> , salary = #{info.salary} </if>
 		WHERE employee_id = #{eid}
 	</update>
+	
 	<!-- 삭제 -->
 	<delete id="deleteEmpInfo" parameterType="int">
 		DELETE employees

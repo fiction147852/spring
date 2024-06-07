@@ -27,5 +27,10 @@
 			<button type="submit">로그아웃</button>
 		</form>
 	</th:block>
+	
+	<!-- csrf token 임의 생성 // 강제로 토큰을 박는것? 무슨말? -->	
+	<input type="hidden"
+		   th:name="${_csrf.parameterName}"		
+		   th:value="${_csrf.token}">
 </body>
 </html>
