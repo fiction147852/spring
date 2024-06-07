@@ -20,26 +20,26 @@ public class SpringSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
-	//메모리상 인증정보 등록 => 테스트 전용 방식
-	@Bean
-	InMemoryUserDetailsManager inMemoryUserDetailsService() {
-		UserDetails user = User.builder()
-								.username("user1")
-								.password(passwordEncoder().encode("1234"))
-								.roles("USER")	//ROLE_USER
-//								.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   roles와 authorities 동시에 사용은안함 왜? 헷갈려서
-								.build();
-		
-		
-		UserDetails admin = User.builder()
-								.username("admin1")
-								.password(passwordEncoder().encode("1234"))
-								.roles("ADMIN")	//ROLE_USER
-//									.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   roles와 authorities 동시에 사용은안함 왜? 헷갈려서
-								.build();
-		
-		return new InMemoryUserDetailsManager(user, admin);
-	}
+//	//메모리상 인증정보 등록 => 테스트 전용 방식
+//	@Bean
+//	InMemoryUserDetailsManager inMemoryUserDetailsService() {
+//		UserDetails user = User.builder()
+//								.username("user1")
+//								.password(passwordEncoder().encode("1234"))
+//								.roles("USER")	//ROLE_USER
+////								.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   roles와 authorities 동시에 사용은안함 왜? 헷갈려서
+//								.build();
+//		
+//		
+//		UserDetails admin = User.builder()
+//								.username("admin1")
+//								.password(passwordEncoder().encode("1234"))
+//								.roles("ADMIN")	//ROLE_USER
+////									.authorities("ROLE_USER") 권한에 대한 부분인데 편한거쓸것   roles와 authorities 동시에 사용은안함 왜? 헷갈려서
+//								.build();
+//		
+//		return new InMemoryUserDetailsManager(user, admin);
+//	}
 	
 	//인증 및 인가 설정
 	@Bean
